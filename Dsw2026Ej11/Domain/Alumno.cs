@@ -5,6 +5,7 @@ public class Alumno
     public int Id { get; }
     public string Nombre { get; }
     public double Promedio { get; }
+    public int Legajo { get; internal set; }
 
     public Alumno(int id, string nombre, double promedio)
     {
