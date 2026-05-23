@@ -6,43 +6,31 @@ namespace Dsw2026Ej11.Tests;
 
 internal class Ejemplos
 {
-    //Agregar 3 alumnos a la lista
-    //Listar por consola los alumnos
-    //Buscar por nombre un alumno que exista y mostrar por consola
-    //Buscar por nombre un alumno que no exista y mostrar por consola el texto "No existe"
-    //Eliminar un alumno y listar por consola los alumnos
-    //Eliminar el primer elemento de la lista y listar por consola los alumnos
     public static void EjemploList()
     {
         var alumnos = new List<string>();
 
-        // Agregar 3 alumnos
         alumnos.Add("Marta");
         alumnos.Add("Juan");
         alumnos.Add("Lucía");
 
-        // Listar por consola los alumnos
         Console.WriteLine("Alumnos iniciales:");
         foreach (var alumno in alumnos)
             Console.WriteLine(alumno);
 
-        // Buscar por nombre un alumno que exista y mostrar por consola
         var nombreBuscar = "Juan";
         var encontrado = alumnos.Find(a => string.Equals(a, nombreBuscar, StringComparison.OrdinalIgnoreCase));
         Console.WriteLine($"\nBuscar '{nombreBuscar}': {(encontrado != null ? encontrado : "No existe")}");
 
-        // Buscar por nombre un alumno que no exista y mostrar por consola el texto "No existe"
         nombreBuscar = "Pedro";
         encontrado = alumnos.Find(a => string.Equals(a, nombreBuscar, StringComparison.OrdinalIgnoreCase));
         Console.WriteLine($"\nBuscar '{nombreBuscar}': {(encontrado != null ? encontrado : "No existe")}");
 
-        // Eliminar un alumno y listar por consola los alumnos
         alumnos.Remove("Juan");
         Console.WriteLine("\nDespués de eliminar 'Juan':");
         foreach (var alumno in alumnos)
             Console.WriteLine(alumno);
 
-        // Eliminar el primer elemento de la lista y listar por consola los alumnos
         if (alumnos.Count > 0)
             alumnos.RemoveAt(0);
 
@@ -51,14 +39,8 @@ internal class Ejemplos
             Console.WriteLine(alumno);
     }
 
-    //Agregar 3 alumnos al diccionario
-    //Listar por consola los alumnos
-    //Buscar un alumno por clave y mostrar por consola
-    //Buscar un alumno por clave, pero que no exista, y mostrar por consola el texto "No existe"
-    //Eliminar un alumno por clave y listar por consola los alumnos
     public static void EjemploDictionary()
     {
-        //Agregar 3 alumnos al diccionario
         var alumnos = new Dictionary<int, string>
         {
             [101] = "Ana Pérez",
@@ -66,14 +48,12 @@ internal class Ejemplos
             [103] = "María Fernández"
         };
 
-        //Listar por consola los alumnos
         Console.WriteLine("Alumnos (inicial):");
         foreach (var kvp in alumnos)
         {
             Console.WriteLine($"Clave: {kvp.Key}, Alumno: {kvp.Value}");
         }
 
-        //Buscar un alumno por clave y mostrar por consola
         int claveExistente = 102;
         if (alumnos.TryGetValue(claveExistente, out var alumnoEncontrado))
         {
@@ -84,7 +64,6 @@ internal class Ejemplos
             Console.WriteLine($"\nBúsqueda: clave {claveExistente} -> No existe");
         }
 
-        //Buscar un alumno por clave, pero que no exista, y mostrar por consola el texto "No existe"
         int claveInexistente = 999;
         if (alumnos.TryGetValue(claveInexistente, out var alumnoNo))
         {
@@ -95,7 +74,6 @@ internal class Ejemplos
             Console.WriteLine($"\nBúsqueda: clave {claveInexistente} -> No existe");
         }
 
-        //Eliminar un alumno por clave y listar por consola los alumnos
         int claveAEliminar = 101;
         if (alumnos.Remove(claveAEliminar))
         {
@@ -113,7 +91,6 @@ internal class Ejemplos
         }
     }
 
-    //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
     public static void EjemploLinq()
     {
         var tipo = typeof(CasoLinq);
@@ -142,7 +119,6 @@ internal class Ejemplos
                 }
                 else
                 {
-                    // Intentar invocar proveyendo valores por defecto (null para referencias, default(T) para valores)
                     object?[] args = parametros.Select(p =>
                     {
                         var t = p.ParameterType;
@@ -159,7 +135,6 @@ internal class Ejemplos
                     }
                     catch (TargetInvocationException tie)
                     {
-                        // Mostrar la excepción interna si la hay
                         Console.WriteLine("Error al invocar con valores por defecto: {0}", tie.InnerException?.Message ?? tie.Message);
                         Console.WriteLine("Omitiendo invocación de {0} que requiere parámetros específicos.", metodo.Name);
                     }
